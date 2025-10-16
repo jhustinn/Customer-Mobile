@@ -1,0 +1,2 @@
+E:/App/SWA/Customer-Mobile-New/cobra_customer_app/android/app/.cxx/RelWithDebInfo/6a6c382i/armeabi-v7a/CMakeFiles/edit_cache.dir
+E:/App/SWA/Customer-Mobile-New/cobra_customer_app/android/app/.cxx/RelWithDebInfo/6a6c382i/armeabi-v7a/CMakeFiles/rebuild_cache.dir

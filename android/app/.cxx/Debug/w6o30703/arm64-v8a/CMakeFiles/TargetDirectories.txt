@@ -1,0 +1,2 @@
+E:/App/SWA/Customer-Mobile-New/cobra_customer_app/android/app/.cxx/Debug/w6o30703/arm64-v8a/CMakeFiles/edit_cache.dir
+E:/App/SWA/Customer-Mobile-New/cobra_customer_app/android/app/.cxx/Debug/w6o30703/arm64-v8a/CMakeFiles/rebuild_cache.dir
