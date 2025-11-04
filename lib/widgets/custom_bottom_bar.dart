@@ -65,27 +65,35 @@ class CustomBottomBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
+    final effectiveIndex = _getEffectiveIndex(context);
 
     switch (variant) {
       case CustomBottomBarVariant.withBadges:
-        return _buildBadgedBottomBar(context, theme, colorScheme);
+        return _buildBadgedBottomBar(context, theme, colorScheme, effectiveIndex);
       case CustomBottomBarVariant.floating:
-        return _buildFloatingBottomBar(context, theme, colorScheme);
+        return _buildFloatingBottomBar(context, theme, colorScheme, effectiveIndex);
       case CustomBottomBarVariant.minimal:
-        return _buildMinimalBottomBar(context, theme, colorScheme);
+        return _buildMinimalBottomBar(context, theme, colorScheme, effectiveIndex);
       case CustomBottomBarVariant.standard:
       default:
-        return _buildStandardBottomBar(context, theme, colorScheme);
+        return _buildStandardBottomBar(context, theme, colorScheme, effectiveIndex);
     }
   }
 
-  Widget _buildStandardBottomBar(
-      BuildContext context, ThemeData theme, ColorScheme colorScheme) {
+  int _getEffectiveIndex(BuildContext context) {
+    final routeName = ModalRoute.of(context)?.settings.name;
+    final idx = _items.indexWhere((e) => e.route == routeName);
+    return idx >= 0 ? idx : currentIndex;
+  }
+
+  Widget _buildStandardBottomBar(BuildContext context, ThemeData theme,
+      ColorScheme colorScheme, int effectiveIndex) {
     return BottomNavigationBar(
-      currentIndex: currentIndex,
+      currentIndex: effectiveIndex,
       onTap: (index) {
+        if (index == effectiveIndex) return;
         onTap(index);
-        Navigator.pushNamed(context, _items[index].route);
+        Navigator.pushReplacementNamed(context, _items[index].route);
       },
       type: BottomNavigationBarType.fixed,
       backgroundColor:
@@ -111,13 +119,14 @@ class CustomBottomBar extends StatelessWidget {
     );
   }
 
-  Widget _buildBadgedBottomBar(
-      BuildContext context, ThemeData theme, ColorScheme colorScheme) {
+  Widget _buildBadgedBottomBar(BuildContext context, ThemeData theme,
+      ColorScheme colorScheme, int effectiveIndex) {
     return BottomNavigationBar(
-      currentIndex: currentIndex,
+      currentIndex: effectiveIndex,
       onTap: (index) {
+        if (index == effectiveIndex) return;
         onTap(index);
-        Navigator.pushNamed(context, _items[index].route);
+        Navigator.pushReplacementNamed(context, _items[index].route);
       },
       type: BottomNavigationBarType.fixed,
       backgroundColor:
@@ -157,8 +166,8 @@ class CustomBottomBar extends StatelessWidget {
     );
   }
 
-  Widget _buildFloatingBottomBar(
-      BuildContext context, ThemeData theme, ColorScheme colorScheme) {
+  Widget _buildFloatingBottomBar(BuildContext context, ThemeData theme,
+      ColorScheme colorScheme, int effectiveIndex) {
     return Container(
       margin: EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -175,10 +184,11 @@ class CustomBottomBar extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(24),
         child: BottomNavigationBar(
-          currentIndex: currentIndex,
+          currentIndex: effectiveIndex,
           onTap: (index) {
+            if (index == effectiveIndex) return;
             onTap(index);
-            Navigator.pushNamed(context, _items[index].route);
+            Navigator.pushReplacementNamed(context, _items[index].route);
           },
           type: BottomNavigationBarType.fixed,
           backgroundColor: Colors.transparent,
@@ -206,8 +216,8 @@ class CustomBottomBar extends StatelessWidget {
     );
   }
 
-  Widget _buildMinimalBottomBar(
-      BuildContext context, ThemeData theme, ColorScheme colorScheme) {
+  Widget _buildMinimalBottomBar(BuildContext context, ThemeData theme,
+      ColorScheme colorScheme, int effectiveIndex) {
     return Container(
       height: 60,
       decoration: BoxDecoration(
@@ -224,12 +234,13 @@ class CustomBottomBar extends StatelessWidget {
         children: _items.asMap().entries.map((entry) {
           final index = entry.key;
           final item = entry.value;
-          final isSelected = index == currentIndex;
+          final isSelected = index == effectiveIndex;
 
           return GestureDetector(
             onTap: () {
+              if (isSelected) return;
               onTap(index);
-              Navigator.pushNamed(context, item.route);
+              Navigator.pushReplacementNamed(context, item.route);
             },
             child: AnimatedContainer(
               duration: Duration(milliseconds: 200),

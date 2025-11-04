@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -234,14 +235,14 @@ class CustomTabBarView extends StatelessWidget {
   final List<Widget> children;
   final TabController? controller;
   final DragStartBehavior dragStartBehavior;
-  final ViewportFraction? viewportFraction;
+  final double viewportFraction;
 
   const CustomTabBarView({
     super.key,
     required this.children,
     this.controller,
     this.dragStartBehavior = DragStartBehavior.start,
-    this.viewportFraction,
+    this.viewportFraction = 1.0,
   });
 
   @override
