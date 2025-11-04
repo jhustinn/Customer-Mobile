@@ -147,32 +147,35 @@ class _LoginFormWidgetState extends State<LoginFormWidget> {
           SizedBox(height: 4.h),
 
           // Login Button
-          ElevatedButton(
-            onPressed: widget.isLoading ? null : widget.onLogin,
-            style: ElevatedButton.styleFrom(
-              padding: EdgeInsets.symmetric(vertical: 4.h),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12.0),
+          SizedBox(
+            height: 5.5.h,
+            child: ElevatedButton(
+              onPressed: widget.isLoading ? null : widget.onLogin,
+              style: ElevatedButton.styleFrom(
+                padding: EdgeInsets.zero,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12.0),
+                ),
               ),
-            ),
-            child: widget.isLoading
-                ? SizedBox(
-                    height: 20.sp,
-                    width: 20.sp,
-                    child: CircularProgressIndicator(
-                      strokeWidth: 2.0,
-                      valueColor: AlwaysStoppedAnimation<Color>(
-                        AppTheme.backgroundLight,
+              child: widget.isLoading
+                  ? SizedBox(
+                      height: 20.sp,
+                      width: 20.sp,
+                      child: CircularProgressIndicator(
+                        strokeWidth: 2.0,
+                        valueColor: AlwaysStoppedAnimation<Color>(
+                          AppTheme.backgroundLight,
+                        ),
+                      ),
+                    )
+                  : Text(
+                      'Masuk',
+                      style: GoogleFonts.inter(
+                        fontSize: 14.sp,
+                        fontWeight: FontWeight.w600,
                       ),
                     ),
-                  )
-                : Text(
-                    'Masuk',
-                    style: GoogleFonts.inter(
-                      fontSize: 16.sp,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
+            ),
           ),
 
           SizedBox(height: 3.h),
@@ -199,29 +202,33 @@ class _LoginFormWidgetState extends State<LoginFormWidget> {
           SizedBox(height: 3.h),
 
           // Register Button
-          OutlinedButton(
-            onPressed: () {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text('Fitur registrasi sedang dalam pengembangan'),
-                  backgroundColor: AppTheme.warningLight,
+          SizedBox(
+            height: 5.5.h,
+            child: OutlinedButton(
+              onPressed: () {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text('Fitur registrasi sedang dalam pengembangan'),
+                    backgroundColor: AppTheme.warningLight,
+                  ),
+                );
+              },
+              style: OutlinedButton.styleFrom(
+                padding: EdgeInsets.zero,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12.0),
                 ),
-              );
-            },
-            style: OutlinedButton.styleFrom(
-              padding: EdgeInsets.symmetric(vertical: 4.h),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12.0),
               ),
-            ),
-            child: Text(
-              'Buat Akun Baru',
-              style: GoogleFonts.inter(
-                fontSize: 16.sp,
-                fontWeight: FontWeight.w600,
+              child: Text(
+                'Buat Akun Baru',
+                style: GoogleFonts.inter(
+                  fontSize: 14.sp,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
             ),
           ),
+        
         ],
       ),
     );
